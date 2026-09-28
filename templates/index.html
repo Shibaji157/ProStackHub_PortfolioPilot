@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PortfolioPilot | Investment Intelligence</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head><body>
+<nav><div class="brand">Portfolio<span>Pilot</span></div><div class="tag">PROSTACKHUB · PYTHON INTERNSHIP</div></nav>
+<main>
+<section class="hero"><div><div class="eyebrow">PERSONAL PORTFOLIO INTELLIGENCE</div>
+<h1>Invest with <span>clarity.</span><br>Track with confidence.</h1>
+<p>Multi-portfolio analytics, weighted cost basis, real-time market pricing, P&amp;L, income and alert-ready monitoring.</p>
+</div><div class="hero-card"><div class="pulse"></div><b>Pipeline healthy</b><small>5-minute price cache · graceful fallback</small></div></section>
+
+<section class="toolbar">
+<form method="get"><label>Active portfolio</label><select name="portfolio" onchange="this.form.submit()">
+{% for p in portfolios %}<option value="{{p.id}}" {% if p.id==selected %}selected{% endif %}>{{p.name}}</option>{% endfor %}
+</select></form>
+<form method="post" action="/portfolio" class="inline"><input name="name" placeholder="New portfolio name" required><button>Create portfolio</button></form>
+</section>
+
+<section class="kpis">
+<div class="kpi"><small>PORTFOLIO VALUE</small><strong>${{"{:,.2f}".format(stats.value)}}</strong><em>Live / fallback market value</em></div>
+<div class="kpi"><small>UNREALIZED P&amp;L</small><strong>${{"{:,.2f}".format(stats.unrealized)}}</strong><em>Open-position performance</em></div>
+<div class="kpi"><small>REALIZED P&amp;L</small><strong>${{"{:,.2f}".format(stats.realized)}}</strong><em>Closed-position gains</em></div>
+<div class="kpi"><small>TTM INCOME YIELD</small><strong>{{stats.ttm_yield}}%</strong><em>${{"{:,.2f}".format(stats.income)}} income logged</em></div>
+</section>
+
+<section class="grid">
+<div class="panel wide"><div class="head"><div><small>HOLDINGS</small><h2>Position intelligence</h2></div><span>{{positions|length}} active assets</span></div>
+<div class="tablewrap"><table><thead><tr><th>Symbol</th><th>Qty</th><th>Avg Cost</th><th>Price</th><th>Value</th><th>Unrealized</th><th>Sector</th><th>Feed</th></tr></thead><tbody>
+{% for x in positions %}<tr><td><b>{{x.symbol}}</b></td><td>{{x.quantity}}</td><td>${{x.avg_cost}}</td><td>${{x.price}}</td><td>${{"{:,.2f}".format(x.value)}}</td><td class="{% if x.unrealized>=0 %}good{% else %}bad{% endif %}">${{x.unrealized}}</td><td>{{x.sector}}</td><td><span class="pill">{{x.price_source}}</span></td></tr>{% endfor %}
+</tbody></table></div></div>
+<div class="panel"><small>ALLOCATION</small><h2>Sector exposure</h2><div id="sector"></div></div>
+</section>
+
+<section class="forms">
+<div class="panel"><small>TRANSACTIONS</small><h2>Log a trade</h2><form method="post" action="/transaction">
+<input type="hidden" name="portfolio_id" value="{{selected}}"><input name="symbol" placeholder="Ticker e.g. AAPL" required>
+<select name="side"><option>BUY</option><option>SELL</option></select><input name="quantity" type="number" step="any" placeholder="Quantity" required>
+<input name="price" type="number" step="any" placeholder="Trade price" required><input name="traded_at" type="date" required><button>Add transaction</button></form></div>
+<div class="panel"><small>INCOME</small><h2>Log dividend</h2><form method="post" action="/dividend">
+<input type="hidden" name="portfolio_id" value="{{selected}}"><input name="symbol" placeholder="Ticker" required><input name="amount" type="number" step="any" placeholder="Payment amount" required>
+<input name="paid_at" type="date" required><button>Add payment</button></form></div>
+<div class="panel"><small>ALERTS</small><h2>Create trigger</h2><form method="post" action="/alert">
+<input type="hidden" name="portfolio_id" value="{{selected}}"><input name="symbol" placeholder="Ticker" required>
+<select name="kind"><option value="above">Price above</option><option value="below">Price below</option><option value="pct_change">Percentage change</option></select>
+<input name="threshold" type="number" step="any" placeholder="Threshold" required><button>Create alert</button></form></div>
+</section>
+</main>
+<footer>PortfolioPilot · Built from scratch with Python, Flask, SQLite &amp; yfinance · Developer: Shibaji Biswas</footer>
+<script>
+const sector={{sector|tojson}};
+Plotly.newPlot('sector',[{labels:Object.keys(sector),values:Object.values(sector),type:'pie',hole:.65,textinfo:'label+percent'}],
+{paper_bgcolor:'transparent',plot_bgcolor:'transparent',font:{color:'#aebbd0'},margin:{t:20,b:20,l:10,r:10},showlegend:false},{displayModeBar:false,responsive:true});
+</script></body></html>

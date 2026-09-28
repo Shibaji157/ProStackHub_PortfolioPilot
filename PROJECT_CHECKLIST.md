@@ -1,0 +1,21 @@
+# Task 3 requirement checklist
+
+- [x] Multi-portfolio support
+- [x] Weighted average cost basis
+- [x] Realized/unrealized P&L
+- [x] Normalized SQLite persistence
+- [x] yfinance price fetching
+- [x] Five-minute cache
+- [x] Graceful price fallback
+- [x] Portfolio value
+- [x] Sector allocation
+- [x] P&L breakdown
+- [x] Interactive Plotly allocation chart
+- [x] Payment/dividend logging
+- [x] TTM yield and income total
+- [x] Price/percentage alert data model
+- [x] Console alert checker
+- [x] Alert history persistence
+- [x] Flask dashboard/API
+- [x] Health endpoint
+- [x] Vercel Python entry point
