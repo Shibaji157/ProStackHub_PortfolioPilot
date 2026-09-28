@@ -1,3 +1,52 @@
+## 🚀 Live Demo
+
+PortfolioPilot is deployed on Vercel:
+
+https://pro-stack-hub-portfolio-pilot.vercel.app
+
+## 💼 PortfolioPilot
+
+PortfolioPilot is a Python-based personal stock portfolio tracker designed to manage multiple investment portfolios, monitor stock holdings, analyze profit and loss, track dividend income, visualize sector allocation, and create stock-price alerts.
+
+### ✨ Key Features
+
+- Multi-portfolio management
+- Real-time stock prices using yfinance
+- 5-minute price caching with fallback support
+- Weighted-average cost basis calculation
+- Realized and unrealized P&L analysis
+- Portfolio value tracking
+- Sector allocation visualization
+- Dividend and income tracking
+- TTM dividend yield calculation
+- Stock price alerts with alert history
+- SQLite database persistence
+- Interactive Plotly visualizations
+- Responsive professional dashboard
+- Flask REST API
+- Vercel deployment support
+
+## 🛠️ Technologies Used
+
+- Python
+- Flask
+- SQLite
+- yfinance
+- Plotly
+- HTML5
+- CSS3
+- JavaScript
+- Git & GitHub
+- Vercel
+
+## 👨‍💻 Developer
+
+**Shibaji Biswas**
+**shibajibiswas.cse@gmail.com**
+** Chandigarh University **
+Python Internship Project — ProStackHub
+
+
 # PortfolioPilot — Personal Stock Portfolio Tracker
 
 PortfolioPilot is a Python/Flask portfolio intelligence application created for **ProStackHub's Python Programming Internship — Task 3**.
