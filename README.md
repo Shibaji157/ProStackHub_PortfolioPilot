@@ -42,8 +42,7 @@ PortfolioPilot is a Python-based personal stock portfolio tracker designed to ma
 ## 👨‍💻 Developer
 
 **Shibaji Biswas**
-**shibajibiswas.cse@gmail.com**
-** Chandigarh University **
+
 Python Internship Project — ProStackHub
 
 
